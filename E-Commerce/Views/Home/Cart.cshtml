@@ -1,0 +1,67 @@
+﻿@model IEnumerable<E_Commerce.Models.Cart>
+
+@{
+    ViewData["Title"] = "cart";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <img src="@Url.Content(item.ImageUrl)" width="200" height="200" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categery)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Details)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="DeleteCart" asp-route-id="@item.ProductId">Delete</a>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+<h3> Total amount:- @ViewBag.amount</h3> 
+<form asp-controller="Home" asp-action="Order" method="post" class="mt-3">
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Checkout</button>
+        </div>
+    </div>
+    </form>

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E_Commerce</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+</head>
+<body>
+    <header>
+        <nav style="z-index:1000" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">E_Commerce</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link  " asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home">&nbsp;Home</i></a>
+                        </li>
+                        &nbsp;
+                        <li class="nav-item">
+                            <a class="nav-link  " asp-area="" asp-controller="Home" asp-action="Cart"><i class="box-ico fa fa-shopping-cart">&nbsp;Cart</i></a>
+                        </li>&nbsp;
+                        <li class="nav-item">
+                            <a class="nav-link  " asp-area="" asp-controller="Home" asp-action="Favourite"><i class="box-ico fa fa-heart">&nbsp;Favourite</i></a>
+                        </li>&nbsp;
+                        <li class="nav-item">
+                            <a class="nav-link  " asp-area="" asp-controller="Home" asp-action="Admin"><i class="box-ico fa fa-user">&nbsp;Admin</i></a>
+                        </li>&nbsp;
+                        <li class="nav-item">
+                            <a class="nav-link  " asp-area="" asp-controller="Home" asp-action="UserProfile"><i class="box-ico fa fa-address-card">&nbsp;UserProfile</i></a>
+                        </li>&nbsp;
+                        <li class="nav-item">
+                            <a class="nav-link  " asp-area="" asp-controller="Home" asp-action="OrderDetails"><i class="box-ico fa fa-object-group">&nbsp;Orders</i></a>
+                        </li>&nbsp;
+
+                        <li class="nav-item">
+                            <a class="nav-link  " asp-area="" asp-controller="Home" asp-action="Logout"><i class="box-ico fa fa-sign-out-alt">&nbsp;Logout</i></a>
+                        </li>&nbsp;
+                        <li class="nav-item  " style="margin-left:9%;">
+                            <form asp-controller="Home" asp-action="Search" method="post" class="mt-3">
+                                <select style="width:180px" name="text">
+                                    <option value="All">All Product</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Watches">Watches</option>
+                                    <option value="Clothes">Clothes</option>
+                                </select>
+
+
+                                <button type="submit" class="btn btn-primary">🔎</button>
+
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - E_Commerce - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

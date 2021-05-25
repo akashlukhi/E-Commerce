@@ -1,0 +1,89 @@
+﻿@model IEnumerable<E_Commerce.Models.ProductModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+
+    /* Float four columns side by side */
+    .column {
+        float: left;
+        width: 25%;
+        padding: 0 10px;
+    }
+
+    /* Remove extra left and right margins, due to padding */
+    .row {
+        margin: 0 -5px;
+    }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+</style>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <img src="@Url.Content(item.ImageUrl)" width="200" height="200" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categery)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Details)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    @if (item.Stock <= 0)
+                    {
+                        <p style="color:red; font-size:large;">Not Available :(</p>
+                    }
+                    else
+                    {
+                        <a asp-action="AddCart" asp-route-id="@item.Id">Add to cart</a><br />
+                        <a asp-action="AddFavourite" asp-route-id="@item.Id"> Add to Favourite</a>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

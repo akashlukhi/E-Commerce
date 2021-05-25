@@ -1,0 +1,283 @@
+﻿
+@model IEnumerable<E_Commerce.Models.OrderModel>
+
+@{
+    ViewData["Title"] = "AdminOrder";
+}
+<link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+<style>
+
+    /* side menu */
+    .wui-side-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 220px;
+        height: 100%;
+        backface-visibility: hidden;
+        z-index: 3;
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+        -webkit-transition: transform 220ms ease-in-out;
+        transition: transform 220ms ease-in-out;
+    }
+
+        .wui-side-menu.open {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+
+            .wui-side-menu.open ~ .content .side-menu-trigger {
+                display: none;
+            }
+
+        .wui-side-menu.open {
+            box-shadow: 2px 0 16px 0 rgba(0,0,0,0.3);
+        }
+
+        .wui-side-menu .header,
+        .wui-content-header {
+            vertical-align: baseline;
+            line-height: 50px;
+        }
+
+    .wui-side-menu-pin-trigger,
+    .wui-side-menu-trigger {
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        display: inline-block;
+        font-size: 18px;
+        line-height: 50px;
+    }
+
+    .wui-side-menu .wui-side-menu-pin-trigger {
+        display: none;
+        float: right;
+    }
+
+        .wui-side-menu .wui-side-menu-pin-trigger i {
+            -webkit-transition: all 0.22s ease-out;
+            -moz-transition: all 0.22s ease-out;
+            -o-transition: all 0.22s ease-out;
+            transition: all 0.22s ease-out;
+        }
+
+    .wui-side-menu .wui-side-menu-items {
+        overflow-y: auto;
+        height: calc(100% - 50px);
+    }
+
+    .wui-side-menu .wui-side-menu-item {
+        display: block;
+        width: 100%;
+        padding: 15px 12px;
+        border-left: 5px solid transparent;
+    }
+
+    .wui-side-menu .wui-side-menu-item {
+        height: 50px
+    }
+
+        .wui-side-menu .wui-side-menu-item i.box-ico {
+            margin-right: 4px;
+        }
+
+    /* overlay */
+    .wui-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2;
+        background-color: rgba(0, 0, 0, 0.1);
+        opacity: 0.5;
+        display: none;
+    }
+
+        .wui-side-menu.open ~ .wui-overlay, .wui-overlay.active {
+            display: block;
+        }
+
+    /* content */
+    .wui-content {
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        -webkit-transition: all 0.22s ease-out;
+        -moz-transition: all 0.22s ease-out;
+        -o-transition: all 0.22s ease-out;
+        transition: all 0.22s ease-out;
+        padding: 0 10px;
+    }
+
+        .wui-content .wui-side-menu-trigger {
+            margin-left: -10px;
+        }
+
+    ul.wui-side-menu-items {
+        list-style: none;
+        padding: 0
+    }
+
+    .wui-side-menu {
+        background-color: #292e34;
+        color: #ddd;
+    }
+
+        .wui-side-menu .wui-side-menu-trigger:hover,
+        .wui-side-menu-item:hover,
+        .wui-side-menu-pin-trigger:hover {
+            color: #fff;
+            background-color: #383f45;
+        }
+
+        .wui-side-menu a {
+            color: #ccc;
+            text-decoration: none
+        }
+
+        .wui-side-menu .wui-side-menu-item.active {
+            border-left-color: #158439;
+            color: #158439
+        }
+
+    .wui-content a {
+        color: #000;
+    }
+
+
+    /* demo */
+    body {
+        margin: 0;
+        font-family: 'arial';
+        font-weight: 100;
+    }
+
+    *, *:after, *:before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    #events {
+        background-color: #ccc;
+    }
+</style>
+
+
+<div style="padding-top:1.5%" class="wui-side-menu open pinned" data-wui-theme="dark">
+    <div class="wui-side-menu-header">
+        <a href="#" class="wui-side-menu-trigger"><i class="fa fa-bars"></i></a>
+        <a href="#" class="wui-side-menu-pin-trigger">
+            <i class="fa fa-thumb-tack"></i>
+        </a>
+    </div>
+    <ul class="wui-side-menu-items">
+        <li>
+            <a href="../UserModels/Index" class="wui-side-menu-item">
+                <i class="box-ico fa fa-users fa-fw"></i>
+                <span class="box-title">All Users</span>
+            </a>
+        </li>
+        <li>
+            <a href="../ProductModels/Index" class="wui-side-menu-item">
+                <i class="box-ico fa fa-object-group fa-fw"></i>
+                <span class="box-title">All Products</span>
+            </a>
+        </li>
+        <li>
+            <a href="../ProductModels/Create" class="wui-side-menu-item">
+                <i class="box-ico fa fa-cart-plus fa-fw"></i>
+                <span class="box-title">Create Product</span>
+            </a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="Home" asp-action="AdminOrder" class="wui-side-menu-item active">
+                <i class="box-ico fa fa-list-alt fa-fw"></i>
+                <span class="box-title">All Order</span>
+            </a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="wui-side-menu-item">
+                <i class="box-ico fas fa-sign-out-alt fa-fw"></i>
+                <span class="box-title">Logout as Admin</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="wui-content">
+    <div class="wui-content-header">
+        <a href="#" class="wui-side-menu-trigger">
+            <i class="fa fa-bars" style="color:white;"></i>
+        </a>
+    </div>
+
+    <div class="wui-content-main"  style="margin-left: 15%; margin-right:10%">
+
+
+        <table class="table" style="margin-top:5%">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @if (item.Status != "Delieverd")
+                            {
+                                <a asp-action="ChangeStatus" asp-route-id="@item.Id">Change Status</a>
+                            }
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
